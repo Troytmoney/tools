@@ -32,14 +32,14 @@ jobs:
       # Compile the Python script into an EXE
       - name: Compile Python script to EXE
         run: |
-          pyinstaller --onefile update.py
+          pyinstaller --onefile your_script.py
 
-      # Archive the EXE into an artifact (optional)
-      - name: Archive EXE
+      # Upload the EXE artifact
+      - name: Upload EXE artifact
         uses: actions/upload-artifact@v2
         with:
           name: compiled-exe
-          path: dist/your_script.exe
+          path: dist/your_script.exe  # Ensure this matches the output path of your EXE
 
       # Optional: Clean up generated files (you can remove this if you want to keep the build artifacts)
       - name: Clean up build files
