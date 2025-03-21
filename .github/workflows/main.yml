@@ -34,9 +34,13 @@ jobs:
         run: |
           pyinstaller --onefile update.py
 
+      # List contents of dist folder to verify .exe exists
+      - name: List contents of dist folder
+        run: dir dist
+
       # Upload the EXE artifact
       - name: Upload EXE artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Using the latest v3 version
         with:
           name: update
           path: dist/update.exe  # Corrected path to match the location of the EXE
