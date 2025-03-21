@@ -39,11 +39,11 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: update
-          path: /dist/update.exe  # Ensure this matches the output path of your EXE
+          path: dist/update.exe  # Corrected path to match the location of the EXE
 
       # Optional: Clean up generated files (you can remove this if you want to keep the build artifacts)
       - name: Clean up build files
         run: |
           rmdir /s /q dist
           rmdir /s /q build
-          del /q your_script.spec
+          del /q update.spec
