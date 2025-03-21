@@ -9,45 +9,32 @@ on:
       - main
 
 jobs:
+
   build:
-    runs-on: windows-latest  # Use a Windows runner to build the .exe file
+    runs-on: windows-latest
 
     steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      # Set up Python
-      - name: Set up Python 3.x
-        uses: actions/setup-python@v2
+      # Check-out repository
+      - uses: actions/checkout@v4
+
+      # Setup Python
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
-      # Install dependencies
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller
-
-      # Compile the Python script into an EXE
-      - name: Compile Python script to EXE
-        run: |
-          pyinstaller --onefile update.py
-
-      # List contents of dist folder to verify .exe exists
-      - name: List contents of dist folder
-        run: dir dist
-
-      # Upload the EXE artifact
-      - name: Upload EXE artifact
-        uses: actions/upload-artifact@v2  # Using the latest v3 version
+      # Build python script into a single execute or app folder (macOS)
+      - uses: Nuitka/Nuitka-Action@main
         with:
-          name: update
-          path: dist/update/update.exe  # Correct path after pyinstaller creates subfolder
+          nuitka-version: main
+          script-name: update.py
+          mode: app
 
-      # Optional: Clean up generated files (you can remove this if you want to keep the build artifacts)
-      - name: Clean up build files
-        run: |
-          rmdir /s /q dist
-          rmdir /s /q build
-          del /q update.spec
+      # Uploads artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: exe
+          path: build/hello_world.exe
+          include-hidden-files: true
