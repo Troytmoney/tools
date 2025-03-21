@@ -38,8 +38,8 @@ jobs:
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v2
         with:
-          name: compiled-exe
-          path: update.exe  # Ensure this matches the output path of your EXE
+          name: update
+          path: /dist/update.exe  # Ensure this matches the output path of your EXE
 
       # Optional: Clean up generated files (you can remove this if you want to keep the build artifacts)
       - name: Clean up build files
