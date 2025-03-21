@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v3  # Using the latest v3 version
         with:
           name: update
-          path: dist/update.exe  # Corrected path to match the location of the EXE
+          path: dist/update/update.exe  # Correct path after pyinstaller creates subfolder
 
       # Optional: Clean up generated files (you can remove this if you want to keep the build artifacts)
       - name: Clean up build files
