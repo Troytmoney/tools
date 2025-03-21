@@ -40,7 +40,7 @@ jobs:
 
       # Upload the EXE artifact
       - name: Upload EXE artifact
-        uses: actions/upload-artifact@v3  # Using the latest v3 version
+        uses: actions/upload-artifact@v2  # Using the latest v3 version
         with:
           name: update
           path: dist/update/update.exe  # Correct path after pyinstaller creates subfolder
